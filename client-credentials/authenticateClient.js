@@ -43,7 +43,7 @@ var sections = [{
   header: "Help",
   optionList: [{
     name: 'help',
-    alias: 'h',
+    alias: 'l',
     description: 'Print this usage guide.'
   }]
 }];
@@ -51,6 +51,10 @@ var sections = [{
 var optionDefinitions = [{
   name: 'client',
   alias: 'c',
+  type: String
+}, {
+  name: 'help',
+  alias: 'l',
   type: String
 }, {
   name: 'secret',
