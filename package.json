@@ -1,0 +1,24 @@
+{
+  "name": "agile-idm-examples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agile-iot/agile-idm-examples.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/agile-iot/agile-idm-examples/issues"
+  },
+  "homepage": "https://github.com/agile-iot/agile-idm-examples#readme",
+  "dependencies": {
+    "command-line-args": "^3.0.4",
+    "command-line-usage": "^3.0.8",
+    "request": "^2.79.0"
+  }
+}
