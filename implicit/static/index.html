@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AGILE-IDM</title>
+<script type="text/javascript">
+  function getQueryVariable(query,variable) {
+      var vars = query.split('&');
+      for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+          if (decodeURIComponent(pair[0]) == variable) {
+              return decodeURIComponent(pair[1]);
+          }
+      }
+      console.log('Query variable %s not found', variable);
+  }
+
+  function parseToken(){
+    var hash = window.location.href.substring(window.location.href.indexOf("#")+1);
+    var token = getQueryVariable(hash, "access_token");
+    var type = getQueryVariable(hash, "token_type");
+    //this if becomes true after IDM redirects with the credentials
+    if(token && type){
+      document.getElementById("resultDivContainer").innerHTML = "Token:"+token+"<br>Type:"+type;
+    }
+    console.log(token);
+	}
+
+  function goToIDM(){
+    var idmSchema = "http";
+    var idmhost = "localhost";
+    var idmport = 3000;
+    //we ask IDM to redirect to this same website afterwards!
+    var myUrl = window.location.href;
+    //in case we already were in IDM, reamove the fragment
+    if(myUrl.indexOf("#")>0){
+       myUrl = myUrl.substring(0,myUrl.indexOf("#"));
+   }
+
+    var client="MyAgileClient";
+    window.location = idmSchema+"://"+idmhost+":"+idmport+"/oauth2/dialog/authorize?response_type=token&redirect_uri="+myUrl+"&client_id="+client;
+  }
+
+</script>
+</head>
+<body onload="parseToken()">
+<div id="content" >
+	<div id="logo">
+  </div>
+	<div id="info">
+		<header><h1>Authenticate User</h1></header>
+    <a href="javascript:goToIDM();">go to AGILE IDM</a>
+    <div id="resultDivContainer" ></div>
+</div>
+</div>
+
+
+</body>
+</html>

@@ -19,6 +19,7 @@
   "dependencies": {
     "command-line-args": "^3.0.4",
     "command-line-usage": "^3.0.8",
+    "express": "^4.14.0",
     "request": "^2.79.0"
   }
 }

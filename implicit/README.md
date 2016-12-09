@@ -9,6 +9,25 @@ The key consideration when this authentication grant is used is that the browser
 
 ## Example Set Up
 
+First of all, we need to create the first user with IDM, if it not already created. To achieve this, execute the following command in the scripts folder of agile-idm-web-ui:
+```
+  node createUser.js --username=bob --password=secret  --auth=agile-local
+```
+Now that a user exists,  an oauth2 client must be registered. To achieve this, execute the following command line from the agile-idm-web-ui script folder. If any of the parameters of the command line execution are changed, the configuration file for the example available in the “conf” folder of the oauth2 client example should be updated:
+```
+node createClient.js --client=MyAgileClient --name="My first example as IDM client" --secret="Ultrasecretstuff" --owner=bob --auth_type=agile-local --uri=http://localhost:3010/
+```
+**note**: that this callback is different than the authorization code. It returns directly to a URL that servers HTML to the browser. In the case of an authorization code flow, this URL needs to redirect to an endpoint in the server that is capable of exchanging the authorization code for a valid access token after presenting the client credentials. In this case, the browser will get the access token directly after following the redirection to http://localhost:3010/index.html, therefore removing the burden on the server side to exchange the token. However, the browser (and the client side JavaScript code) needs to be trusted, otherwise this mechanism should not be used.
+
+Afterwards, run identity management by executing this in the root of the agile-idm-web-ui folder:
+```
+  node app.js
+```
+And subsequently run the oauht2 client example by executing this in the root of the oauth2 client example project:
+```
+  node index.js
+```
+Then visit http://localhost:3010/
 
 ##Overview
 
@@ -34,8 +53,3 @@ From step 1 to 3, the authentication between IDM and the Oauth2 client occurs; h
 3. On successful user authentication, IDM redirects the user with an access token and token type including the token and the token type as an URL fragment according to RFC 6749. At this point the browser can parse the URI and obtain the token and the token type to use it afterwards.
 
 From this point on, the browser can use this token to interact with IDM, or with any other AGILE component that has been integrated with AGILE IDM.
-
-
-
-
-
