@@ -39,4 +39,3 @@ From this point on, the browser can use this token to interact with IDM, or with
 
 
 
-1.
